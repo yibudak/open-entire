@@ -77,7 +77,7 @@ func (r *Repository) EnsureCheckpointsBranch() error {
 	_ = r.runSilent("git", "clean", "-fd")
 
 	// Create initial commit
-	_, err = r.run("git", "commit", "--allow-empty", "-m", "Initialize entire checkpoints")
+	_, err = r.run("git", "commit", "--allow-empty", "--no-verify", "-m", "Initialize entire checkpoints")
 	if err != nil {
 		// Try to go back
 		_, _ = r.run("git", "checkout", currentBranch)
@@ -186,7 +186,7 @@ func (r *Repository) CommitOnBranch(branch, message string, files map[string][]b
 
 	// Stage and commit
 	_, _ = r.run("git", "add", "-A")
-	if _, err := r.run("git", "commit", "-m", message); err != nil {
+	if _, err := r.run("git", "commit", "--no-verify", "-m", message); err != nil {
 		_, _ = r.run("git", "checkout", currentBranch)
 		return fmt.Errorf("failed to commit: %w", err)
 	}
