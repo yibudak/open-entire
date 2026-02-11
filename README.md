@@ -45,7 +45,7 @@ Checkpoints: 14
 
 ```bash
 # Install
-go install github.com/yibudak/open-entire/cmd/entire@latest
+go install github.com/yibudak/open-entire/cmd/open-entire@latest
 
 # Enable in your repo
 cd your-project
@@ -83,7 +83,7 @@ curl -fsSL ... | sh -s -- --dir ~/.local/bin
 ### From Source
 
 ```bash
-go install github.com/yibudak/open-entire/cmd/entire@latest
+go install github.com/yibudak/open-entire/cmd/open-entire@latest
 ```
 
 ### Build Locally
@@ -305,7 +305,7 @@ make lint
 
 ```
 open-entire/
-├── cmd/entire/              # Entry point
+├── cmd/open-entire/         # Entry point
 ├── internal/
 │   ├── cli/                 # Cobra commands (11 commands)
 │   ├── config/              # 4-layer config system

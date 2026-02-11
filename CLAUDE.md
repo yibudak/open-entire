@@ -18,7 +18,7 @@ go test -run TestParseJSONL ./internal/agent/claude/
 go test -v ./internal/checkpoint/
 ```
 
-Version info is injected via ldflags (`-X main.version`, `-X main.commit`, `-X main.date`). The entry point is `cmd/entire/main.go`.
+Version info is injected via ldflags (`-X main.version`, `-X main.commit`, `-X main.date`). The entry point is `cmd/open-entire/main.go`.
 
 ## Architecture
 

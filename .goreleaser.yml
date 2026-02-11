@@ -6,7 +6,7 @@ before:
     - go generate ./...
 
 builds:
-  - main: ./cmd/entire
+  - main: ./cmd/open-entire
     binary: open-entire
     env:
       - CGO_ENABLED=0

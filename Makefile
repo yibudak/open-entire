@@ -7,10 +7,10 @@ LDFLAGS := -ldflags "-s -w -X main.version=$(VERSION) -X main.commit=$(COMMIT) -
 .PHONY: build test lint install clean fmt vet
 
 build:
-	go build $(LDFLAGS) -o bin/$(BINARY_NAME) ./cmd/entire
+	go build $(LDFLAGS) -o bin/$(BINARY_NAME) ./cmd/open-entire
 
 install:
-	go install $(LDFLAGS) ./cmd/entire
+	go install $(LDFLAGS) ./cmd/open-entire
 
 test:
 	go test ./... -v
