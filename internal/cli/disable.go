@@ -16,8 +16,8 @@ func newDisableCmd() *cobra.Command {
 
 	cmd := &cobra.Command{
 		Use:   "disable",
-		Short: "Remove Entire hooks from repository",
-		Long:  "Remove Git hooks installed by Entire. Data is preserved unless --uninstall is used.",
+		Short: "Remove Open-Entire hooks from repository",
+		Long:  "Remove Git hooks installed by Open-Entire. Data is preserved unless --uninstall is used.",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			repoDir, err := findRepoRoot()
 			if err != nil {
@@ -28,11 +28,11 @@ func newDisableCmd() *cobra.Command {
 				return fmt.Errorf("failed to remove hooks: %w", err)
 			}
 
-			fmt.Println("Entire hooks removed.")
+			fmt.Println("Open-Entire hooks removed.")
 
 			if uninstall {
-				fmt.Println("Session data preserved in .entire/ directory.")
-				fmt.Println("To fully remove, delete the .entire/ directory manually.")
+				fmt.Println("Session data preserved in .open-entire/ directory.")
+				fmt.Println("To fully remove, delete the .open-entire/ directory manually.")
 			}
 
 			_ = force

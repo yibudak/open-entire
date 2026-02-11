@@ -25,7 +25,7 @@ func TestLoadDefaults(t *testing.T) {
 
 func TestLoadFromFile(t *testing.T) {
 	dir := t.TempDir()
-	entireDir := filepath.Join(dir, ".entire")
+	entireDir := filepath.Join(dir, ".open-entire")
 	require.NoError(t, os.MkdirAll(entireDir, 0o755))
 
 	configJSON := `{"strategy": "auto-commit", "log_level": "debug"}`
@@ -40,7 +40,7 @@ func TestLoadFromFile(t *testing.T) {
 
 func TestLoadLocalOverridesProject(t *testing.T) {
 	dir := t.TempDir()
-	entireDir := filepath.Join(dir, ".entire")
+	entireDir := filepath.Join(dir, ".open-entire")
 	require.NoError(t, os.MkdirAll(entireDir, 0o755))
 
 	projectJSON := `{"strategy": "manual-commit"}`

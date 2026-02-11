@@ -5,7 +5,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Build & Test Commands
 
 ```bash
-make build          # Build binary to bin/entire
+make build          # Build binary to bin/open-entire
 make test           # go test ./... -v
 make test-race      # go test -race ./...
 make lint           # golangci-lint run ./...
@@ -22,7 +22,7 @@ Version info is injected via ldflags (`-X main.version`, `-X main.commit`, `-X m
 
 ## Architecture
 
-This is a Go CLI (`github.com/spf13/cobra`) that captures AI coding agent sessions as Git-stored checkpoints. All state lives in Git or `.entire/` JSON files — no database.
+This is a Go CLI (`github.com/spf13/cobra`) that captures AI coding agent sessions as Git-stored checkpoints. All state lives in Git or `.open-entire/` JSON files — no database.
 
 ### Data Flow
 
@@ -52,9 +52,9 @@ Git Hook (post-commit/pre-push)
 
 4-layer merge, highest priority first:
 1. Env vars (`ENTIRE_ENABLED`, `ENTIRE_STRATEGY`, `ENTIRE_LOG_LEVEL`, `ENTIRE_TELEMETRY`)
-2. `.entire/settings.local.json` (gitignored)
-3. `.entire/settings.json` (committed)
-4. `~/.config/entire/settings.json` (global)
+2. `.open-entire/settings.local.json` (gitignored)
+3. `.open-entire/settings.json` (committed)
+4. `~/.config/open-entire/settings.json` (global)
 5. Built-in defaults in `internal/config/defaults.go`
 
 ### Package Dependencies

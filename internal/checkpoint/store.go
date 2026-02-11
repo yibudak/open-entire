@@ -166,7 +166,7 @@ func (s *Store) Rewind(repoDir, checkpointID string, hard bool) error {
 
 // RestoreLogs restores only the session logs from a checkpoint.
 func (s *Store) RestoreLogs(repoDir, checkpointID string) error {
-	// Read session data and write to local .entire/ directory
+	// Read session data and write to local .open-entire/ directory
 	_, err := s.Get(checkpointID)
 	if err != nil {
 		return err

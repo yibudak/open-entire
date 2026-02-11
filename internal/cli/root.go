@@ -17,9 +17,9 @@ var (
 // NewRootCmd creates the root cobra command.
 func NewRootCmd(version, commit, date string) *cobra.Command {
 	rootCmd := &cobra.Command{
-		Use:   "entire",
+		Use:   "open-entire",
 		Short: "Open-source AI session capture CLI",
-		Long: `Entire captures AI coding agent sessions and links them to Git workflows.
+		Long: `Open-Entire captures AI coding agent sessions and links them to Git workflows.
 It creates versioned, searchable checkpoints of your AI interactions.`,
 		SilenceUsage:  true,
 		SilenceErrors: true,
@@ -38,7 +38,7 @@ It creates versioned, searchable checkpoints of your AI interactions.`,
 			}
 
 			logging.Setup(level, cfgQuiet)
-			slog.Debug("entire starting", "version", version)
+			slog.Debug("open-entire starting", "version", version)
 		},
 	}
 

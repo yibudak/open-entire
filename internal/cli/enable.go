@@ -21,8 +21,8 @@ func newEnableCmd() *cobra.Command {
 
 	cmd := &cobra.Command{
 		Use:   "enable",
-		Short: "Initialize Entire in a Git repository",
-		Long:  "Install Git hooks and configure Entire to capture AI coding sessions.",
+		Short: "Initialize Open-Entire in a Git repository",
+		Long:  "Install Git hooks and configure Open-Entire to capture AI coding sessions.",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			repoDir, err := findRepoRoot()
 			if err != nil {
@@ -36,15 +36,15 @@ func newEnableCmd() *cobra.Command {
 
 			// Check if already enabled
 			if repo.IsEntireEnabled() && !force {
-				fmt.Println("Entire is already enabled in this repository.")
+				fmt.Println("Open-Entire is already enabled in this repository.")
 				fmt.Println("Use --force to re-initialize.")
 				return nil
 			}
 
-			// Create .entire directory
-			entireDir := repoDir + "/.entire"
+			// Create .open-entire directory
+			entireDir := repoDir + "/.open-entire"
 			if err := os.MkdirAll(entireDir, 0o755); err != nil {
-				return fmt.Errorf("failed to create .entire directory: %w", err)
+				return fmt.Errorf("failed to create .open-entire directory: %w", err)
 			}
 
 			// Save config
@@ -69,9 +69,9 @@ func newEnableCmd() *cobra.Command {
 			_ = local
 			_ = agent
 
-			fmt.Println("Entire enabled successfully!")
+			fmt.Println("Open-Entire enabled successfully!")
 			fmt.Printf("  Strategy: %s\n", cfg.Strategy)
-			fmt.Printf("  Config:   %s/.entire/settings.json\n", repoDir)
+			fmt.Printf("  Config:   %s/.open-entire/settings.json\n", repoDir)
 			fmt.Println("\nYour AI coding sessions will now be captured as checkpoints.")
 			return nil
 		},

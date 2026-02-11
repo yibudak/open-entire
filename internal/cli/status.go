@@ -39,7 +39,7 @@ func newStatusCmd() *cobra.Command {
 			fmt.Printf("Branch:     %s\n", branch)
 
 			if !enabled {
-				fmt.Println("\nRun 'entire enable' to start capturing sessions.")
+				fmt.Println("\nRun 'open-entire enable' to start capturing sessions.")
 				return nil
 			}
 

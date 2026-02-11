@@ -30,21 +30,21 @@ type SummarizeOptions struct {
 func Load(repoDir string) (*Config, error) {
 	cfg := DefaultConfig()
 
-	// Layer 1: Global config (~/.config/entire/settings.json)
+	// Layer 1: Global config (~/.config/open-entire/settings.json)
 	globalPath := globalConfigPath()
 	if err := mergeFromFile(&cfg, globalPath); err != nil && !os.IsNotExist(err) {
 		return nil, err
 	}
 
 	if repoDir != "" {
-		// Layer 2: Project config (.entire/settings.json)
-		projectPath := filepath.Join(repoDir, ".entire", "settings.json")
+		// Layer 2: Project config (.open-entire/settings.json)
+		projectPath := filepath.Join(repoDir, ".open-entire", "settings.json")
 		if err := mergeFromFile(&cfg, projectPath); err != nil && !os.IsNotExist(err) {
 			return nil, err
 		}
 
-		// Layer 3: Local config (.entire/settings.local.json)
-		localPath := filepath.Join(repoDir, ".entire", "settings.local.json")
+		// Layer 3: Local config (.open-entire/settings.local.json)
+		localPath := filepath.Join(repoDir, ".open-entire", "settings.local.json")
 		if err := mergeFromFile(&cfg, localPath); err != nil && !os.IsNotExist(err) {
 			return nil, err
 		}
@@ -58,7 +58,7 @@ func Load(repoDir string) (*Config, error) {
 
 // Save writes config to the project settings file.
 func Save(repoDir string, cfg *Config) error {
-	dir := filepath.Join(repoDir, ".entire")
+	dir := filepath.Join(repoDir, ".open-entire")
 	if err := os.MkdirAll(dir, 0o755); err != nil {
 		return err
 	}
@@ -72,7 +72,7 @@ func Save(repoDir string, cfg *Config) error {
 
 func globalConfigPath() string {
 	home, _ := os.UserHomeDir()
-	return filepath.Join(home, ".config", "entire", "settings.json")
+	return filepath.Join(home, ".config", "open-entire", "settings.json")
 }
 
 func mergeFromFile(cfg *Config, path string) error {

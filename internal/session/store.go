@@ -21,11 +21,11 @@ type Store struct {
 	state   State
 }
 
-// NewStore creates a store backed by .entire/state.json.
+// NewStore creates a store backed by .open-entire/state.json.
 func NewStore(repoDir string) (*Store, error) {
 	s := &Store{
 		repoDir: repoDir,
-		path:    filepath.Join(repoDir, ".entire", "state.json"),
+		path:    filepath.Join(repoDir, ".open-entire", "state.json"),
 	}
 	if err := s.load(); err != nil && !os.IsNotExist(err) {
 		return nil, err

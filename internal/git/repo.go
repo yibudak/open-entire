@@ -27,14 +27,14 @@ func Open(dir string) (*Repository, error) {
 	return &Repository{Dir: dir}, nil
 }
 
-// IsEntireEnabled checks if Entire hooks are installed.
+// IsEntireEnabled checks if Open-Entire hooks are installed.
 func (r *Repository) IsEntireEnabled() bool {
 	hookPath := filepath.Join(r.Dir, ".git", "hooks", "post-commit")
 	data, err := os.ReadFile(hookPath)
 	if err != nil {
 		return false
 	}
-	return strings.Contains(string(data), "entire")
+	return strings.Contains(string(data), "open-entire")
 }
 
 // CurrentBranch returns the current branch name.

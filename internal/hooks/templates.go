@@ -1,7 +1,7 @@
 package hooks
 
 const postCommitScript = `#!/bin/sh
-# managed by entire
+# managed by open-entire
 # Post-commit hook: capture checkpoint on commit
 
 # Skip if entire is disabled
@@ -9,11 +9,11 @@ if [ "$ENTIRE_ENABLED" = "false" ] || [ "$ENTIRE_ENABLED" = "0" ]; then
     exit 0
 fi
 
-# Find entire binary
-ENTIRE_BIN=$(command -v entire 2>/dev/null)
+# Find open-entire binary
+ENTIRE_BIN=$(command -v open-entire 2>/dev/null)
 if [ -z "$ENTIRE_BIN" ]; then
     # Try common install paths
-    for p in /usr/local/bin/entire "$HOME/go/bin/entire" "$HOME/.local/bin/entire"; do
+    for p in /usr/local/bin/open-entire "$HOME/go/bin/open-entire" "$HOME/.local/bin/open-entire"; do
         if [ -x "$p" ]; then
             ENTIRE_BIN="$p"
             break
@@ -30,7 +30,7 @@ fi
 `
 
 const prePushScript = `#!/bin/sh
-# managed by entire
+# managed by open-entire
 # Pre-push hook: sync checkpoints
 
 # Skip if entire is disabled
@@ -38,9 +38,9 @@ if [ "$ENTIRE_ENABLED" = "false" ] || [ "$ENTIRE_ENABLED" = "0" ]; then
     exit 0
 fi
 
-ENTIRE_BIN=$(command -v entire 2>/dev/null)
+ENTIRE_BIN=$(command -v open-entire 2>/dev/null)
 if [ -z "$ENTIRE_BIN" ]; then
-    for p in /usr/local/bin/entire "$HOME/go/bin/entire" "$HOME/.local/bin/entire"; do
+    for p in /usr/local/bin/open-entire "$HOME/go/bin/open-entire" "$HOME/.local/bin/open-entire"; do
         if [ -x "$p" ]; then
             ENTIRE_BIN="$p"
             break

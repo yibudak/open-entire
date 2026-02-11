@@ -28,7 +28,7 @@ func TestInstallAndRemove(t *testing.T) {
 	postCommit := filepath.Join(dir, ".git", "hooks", "post-commit")
 	data, err := os.ReadFile(postCommit)
 	require.NoError(t, err)
-	assert.Contains(t, string(data), "managed by entire")
+	assert.Contains(t, string(data), "managed by open-entire")
 
 	// Remove
 	err = Remove(dir)

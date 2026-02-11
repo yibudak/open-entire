@@ -6,7 +6,7 @@
 set -eu
 
 REPO="yibudak/open-entire"
-BINARY="entire"
+BINARY="open-entire"
 INSTALL_DIR="/usr/local/bin"
 VERSION=""
 
@@ -153,7 +153,7 @@ main() {
     # Strip leading 'v' for archive name
     VERSION_NUM="${VERSION#v}"
 
-    log "Installing entire ${VERSION}"
+    log "Installing open-entire ${VERSION}"
 
     ARCHIVE="${BINARY}_${VERSION_NUM}_${OS}_${ARCH}.tar.gz"
     DOWNLOAD_URL="https://github.com/${REPO}/releases/download/${VERSION}/${ARCHIVE}"
@@ -184,11 +184,11 @@ main() {
     fi
     chmod +x "${INSTALL_DIR}/${BINARY}"
 
-    ok "Installed entire ${VERSION} to ${INSTALL_DIR}/${BINARY}"
+    ok "Installed open-entire ${VERSION} to ${INSTALL_DIR}/${BINARY}"
     echo ""
     "${INSTALL_DIR}/${BINARY}" version
     echo ""
-    ok "Run 'entire enable' in a Git repo to get started."
+    ok "Run 'open-entire enable' in a Git repo to get started."
 }
 
 main

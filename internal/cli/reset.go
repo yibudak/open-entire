@@ -15,7 +15,7 @@ func newResetCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "reset",
 		Short: "Delete shadow branch and session state",
-		Long:  "Remove Entire's shadow branch and local session state for a clean start.",
+		Long:  "Remove Open-Entire's shadow branch and local session state for a clean start.",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			repoDir, err := findRepoRoot()
 			if err != nil {
@@ -23,7 +23,7 @@ func newResetCmd() *cobra.Command {
 			}
 
 			if !force {
-				fmt.Println("This will delete all local Entire state including active sessions.")
+				fmt.Println("This will delete all local Open-Entire state including active sessions.")
 				fmt.Println("Use --force to confirm.")
 				return nil
 			}
@@ -40,12 +40,12 @@ func newResetCmd() *cobra.Command {
 			}
 
 			// Remove local state
-			statePath := filepath.Join(repoDir, ".entire", "state.json")
+			statePath := filepath.Join(repoDir, ".open-entire", "state.json")
 			if err := os.Remove(statePath); err != nil && !os.IsNotExist(err) {
 				return fmt.Errorf("failed to remove state: %w", err)
 			}
 
-			fmt.Println("Entire state reset successfully.")
+			fmt.Println("Open-Entire state reset successfully.")
 			return nil
 		},
 	}

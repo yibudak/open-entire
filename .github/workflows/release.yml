@@ -57,12 +57,12 @@ jobs:
           COMMIT="${GITHUB_SHA::7}"
           DATE="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
           go build -ldflags "-s -w -X main.version=${VERSION} -X main.commit=${COMMIT} -X main.date=${DATE}" \
-            -o entire ./cmd/entire
+            -o open-entire ./cmd/entire
 
       - name: Package
         run: |
-          ARCHIVE="entire_${GITHUB_REF_NAME#v}_${{ matrix.goos }}_${{ matrix.goarch }}.tar.gz"
-          tar czf "${ARCHIVE}" entire
+          ARCHIVE="open-entire_${GITHUB_REF_NAME#v}_${{ matrix.goos }}_${{ matrix.goarch }}.tar.gz"
+          tar czf "${ARCHIVE}" open-entire
           sha256sum "${ARCHIVE}" > "${ARCHIVE}.sha256"
           echo "ARCHIVE=${ARCHIVE}" >> "$GITHUB_ENV"
 
@@ -87,7 +87,7 @@ jobs:
           for combo in linux_amd64 linux_arm64 darwin_amd64 darwin_arm64; do
             gh release download "${GITHUB_REF_NAME}" \
               --repo "${{ github.repository }}" \
-              --pattern "entire_${VERSION}_${combo}.tar.gz.sha256" \
+              --pattern "open-entire_${VERSION}_${combo}.tar.gz.sha256" \
               --dir assets || true
           done
 

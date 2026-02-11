@@ -5,7 +5,7 @@
   <img src="https://img.shields.io/badge/agent-Claude_Code-blueviolet?style=flat-square" alt="Claude Code">
 </p>
 
-<h1 align="center">entire</h1>
+<h1 align="center">open-entire</h1>
 
 <p align="center">
   <strong>Open-source AI session capture for Git.</strong><br>
@@ -13,14 +13,14 @@
 </p>
 
 <p align="center">
-  <code>entire enable</code> &rarr; code with AI &rarr; <code>git commit</code> &rarr; checkpoint captured
+  <code>open-entire enable</code> &rarr; code with AI &rarr; <code>git commit</code> &rarr; checkpoint captured
 </p>
 
 ---
 
-## What is Entire?
+## What is Open-Entire?
 
-**Entire** hooks into Git to automatically capture AI coding agent sessions as **checkpoints** — versioned, searchable snapshots that live on a dedicated Git branch. No external database, no cloud dependency. Just Git.
+**Open-Entire** hooks into Git to automatically capture AI coding agent sessions as **checkpoints** — versioned, searchable snapshots that live on a dedicated Git branch. No external database, no cloud dependency. Just Git.
 
 Every checkpoint records:
 - Full conversation transcript (prompts, responses, tool calls)
@@ -29,7 +29,7 @@ Every checkpoint records:
 - File diffs linked to the session
 
 ```
-$ entire status
+$ open-entire status
 Repository: /Users/dev/myproject
 Enabled:    true
 Strategy:   manual-commit
@@ -49,7 +49,7 @@ go install github.com/yibudak/open-entire/cmd/entire@latest
 
 # Enable in your repo
 cd your-project
-entire enable
+open-entire enable
 
 # That's it. Code with Claude Code, commit, and checkpoints are captured.
 git commit -m "feat: add auth"
@@ -57,7 +57,7 @@ git commit -m "feat: add auth"
 # => Entire-Attribution: 73% agent (146/200 lines)
 
 # Browse sessions in your browser
-entire serve
+open-entire serve
 ```
 
 ---
@@ -91,14 +91,14 @@ go install github.com/yibudak/open-entire/cmd/entire@latest
 ```bash
 git clone https://github.com/yibudak/open-entire.git
 cd open-entire
-make build      # => bin/entire
-make install    # => $GOPATH/bin/entire
+make build      # => bin/open-entire
+make install    # => $GOPATH/bin/open-entire
 ```
 
 ### Homebrew (coming soon)
 
 ```bash
-brew install yibudak/tap/entire
+brew install yibudak/tap/open-entire
 ```
 
 ---
@@ -107,50 +107,50 @@ brew install yibudak/tap/entire
 
 | Command | Description |
 |---------|-------------|
-| `entire enable` | Initialize Entire in a Git repo — installs hooks, creates config |
-| `entire disable` | Remove hooks (data preserved) |
-| `entire status` | Show capture status, active sessions, checkpoint count |
-| `entire rewind` | Rewind working tree to a previous checkpoint |
-| `entire resume <branch>` | Checkout branch and find associated session |
-| `entire explain` | Display transcript, token usage, attribution for a checkpoint |
-| `entire serve` | Launch local web viewer to browse all sessions |
-| `entire clean` | Remove orphaned shadow branches |
-| `entire doctor` | Find and fix stuck sessions |
-| `entire reset` | Delete all local Entire state |
-| `entire version` | Print build info |
+| `open-entire enable` | Initialize Entire in a Git repo — installs hooks, creates config |
+| `open-entire disable` | Remove hooks (data preserved) |
+| `open-entire status` | Show capture status, active sessions, checkpoint count |
+| `open-entire rewind` | Rewind working tree to a previous checkpoint |
+| `open-entire resume <branch>` | Checkout branch and find associated session |
+| `open-entire explain` | Display transcript, token usage, attribution for a checkpoint |
+| `open-entire serve` | Launch local web viewer to browse all sessions |
+| `open-entire clean` | Remove orphaned shadow branches |
+| `open-entire doctor` | Find and fix stuck sessions |
+| `open-entire reset` | Delete all local Entire state |
+| `open-entire version` | Print build info |
 
-### `entire enable`
+### `open-entire enable`
 
 ```bash
-entire enable                          # defaults: manual-commit strategy
-entire enable --strategy auto-commit   # checkpoint after every AI response
-entire enable --force                  # re-initialize existing setup
+open-entire enable                         # defaults: manual-commit strategy
+open-entire enable--strategy auto-commit   # checkpoint after every AI response
+open-entire enable--force                  # re-initialize existing setup
 ```
 
-### `entire rewind`
+### `open-entire rewind`
 
 ```bash
-entire rewind --list                   # show available checkpoints
-entire rewind --to a3b2c4d5e6f7       # restore working tree
-entire rewind --to a3b2c4d5 --reset   # hard reset
-entire rewind --to a3b2c4d5 --logs-only  # restore session logs only
+open-entire rewind--list                   # show available checkpoints
+open-entire rewind--to a3b2c4d5e6f7       # restore working tree
+open-entire rewind--to a3b2c4d5 --reset   # hard reset
+open-entire rewind--to a3b2c4d5 --logs-only  # restore session logs only
 ```
 
-### `entire explain`
+### `open-entire explain`
 
 ```bash
-entire explain --checkpoint a3b2c4d5e6f7          # by checkpoint ID
-entire explain --commit abc123                     # by commit hash
-entire explain --checkpoint a3b2c4d5e6f7 --full    # full transcript
-entire explain --checkpoint a3b2c4d5e6f7 --short   # summary only
-entire explain --checkpoint a3b2c4d5e6f7 --raw-transcript  # raw JSONL
+open-entire explain--checkpoint a3b2c4d5e6f7          # by checkpoint ID
+open-entire explain--commit abc123                     # by commit hash
+open-entire explain--checkpoint a3b2c4d5e6f7 --full    # full transcript
+open-entire explain--checkpoint a3b2c4d5e6f7 --short   # summary only
+open-entire explain--checkpoint a3b2c4d5e6f7 --raw-transcript  # raw JSONL
 ```
 
-### `entire serve`
+### `open-entire serve`
 
 ```bash
-entire serve              # http://localhost:8080
-entire serve --port 3000  # custom port
+open-entire serve             # http://localhost:8080
+open-entire serve--port 3000  # custom port
 ```
 
 The web viewer provides:
@@ -180,7 +180,7 @@ The web viewer provides:
                                          └─────────────────────────────┘
 ```
 
-1. **Enable** — `entire enable` installs Git hooks and saves config to `.entire/`
+1. **Enable** — `open-entire enable` installs Git hooks and saves config to `.open-entire/`
 2. **Detect** — Hooks detect when an AI agent (Claude Code) is active
 3. **Capture** — On commit (or agent response), a checkpoint is created
 4. **Store** — Session data is committed to the `entire/checkpoints/v1` orphan branch
@@ -221,14 +221,14 @@ Entire-Attribution: 73% agent (146/200 lines)
 
 ## Configuration
 
-Entire uses a 4-layer config system (highest priority first):
+Open-Entire uses a 4-layer config system (highest priority first):
 
 | Layer | Path | Notes |
 |-------|------|-------|
 | Environment | `ENTIRE_*` vars | Highest priority |
-| Local | `.entire/settings.local.json` | Gitignored, per-developer |
-| Project | `.entire/settings.json` | Committed, shared |
-| Global | `~/.config/entire/settings.json` | User-wide defaults |
+| Local | `.open-entire/settings.local.json` | Gitignored, per-developer |
+| Project | `.open-entire/settings.json` | Committed, shared |
+| Global | `~/.config/open-entire/settings.json` | User-wide defaults |
 
 ```json
 {
@@ -266,7 +266,7 @@ Entire uses a 4-layer config system (highest priority first):
 
 ### Claude Code Integration
 
-Entire reads Claude Code session files from:
+Open-Entire reads Claude Code session files from:
 
 ```
 ~/.claude/projects/<encoded-repo-path>/<session-id>.jsonl
@@ -363,7 +363,7 @@ type Strategy interface {
 | Feature | open-entire | Entire.io |
 |---------|-------------|-----------|
 | Session capture | Local Git branch | Cloud + Git branch |
-| Web viewer | Local (`entire serve`) | Hosted (entire.io) |
+| Web viewer | Local (`open-entire serve`) | Hosted (entire.io) |
 | Auth | None needed | GitHub OAuth |
 | Team features | — | Shared dashboards |
 | Agents | Claude Code | Claude Code, Gemini CLI |

@@ -6,9 +6,9 @@ import (
 	"path/filepath"
 )
 
-const entireMarker = "# managed by entire"
+const entireMarker = "# managed by open-entire"
 
-// Install installs Entire git hooks into the repository.
+// Install installs Open-Entire git hooks into the repository.
 func Install(repoDir string, force bool) error {
 	hooksDir := filepath.Join(repoDir, ".git", "hooks")
 	if err := os.MkdirAll(hooksDir, 0o755); err != nil {
@@ -39,7 +39,7 @@ func Install(repoDir string, force bool) error {
 	return nil
 }
 
-// Remove removes Entire git hooks from the repository.
+// Remove removes Open-Entire git hooks from the repository.
 func Remove(repoDir string) error {
 	hooksDir := filepath.Join(repoDir, ".git", "hooks")
 
@@ -59,7 +59,7 @@ func Remove(repoDir string) error {
 	return nil
 }
 
-// IsInstalled checks if Entire hooks are installed.
+// IsInstalled checks if Open-Entire hooks are installed.
 func IsInstalled(repoDir string) bool {
 	path := filepath.Join(repoDir, ".git", "hooks", "post-commit")
 	data, err := os.ReadFile(path)

@@ -61,10 +61,10 @@ jobs:
           COMMIT="${GITHUB_SHA::7}"
           DATE="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
           go build -ldflags "-s -w -X main.version=${VERSION} -X main.commit=${COMMIT} -X main.date=${DATE}" \
-            -o entire ./cmd/entire
+            -o open-entire ./cmd/entire
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: entire-${{ matrix.goos }}-${{ matrix.goarch }}
-          path: entire
+          name: open-entire-${{ matrix.goos }}-${{ matrix.goarch }}
+          path: open-entire
