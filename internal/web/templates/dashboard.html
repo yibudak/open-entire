@@ -1,0 +1,34 @@
+{{define "content"}}
+<h1>Dashboard</h1>
+<p class="subtitle">Repository: {{.RepoDir}}</p>
+
+<section class="card">
+    <h2>Recent Checkpoints</h2>
+    {{if .Checkpoints}}
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Branch</th>
+                <th>Message</th>
+                <th>Sessions</th>
+                <th>Created</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{range .Checkpoints}}
+            <tr>
+                <td><a href="/checkpoints/{{.ID}}">{{slice .ID 0 8}}</a></td>
+                <td><span class="badge">{{.Branch}}</span></td>
+                <td>{{.Message}}</td>
+                <td>{{len .Sessions}}</td>
+                <td>{{.CreatedAt.Format "2006-01-02 15:04"}}</td>
+            </tr>
+            {{end}}
+        </tbody>
+    </table>
+    {{else}}
+    <p class="empty">No checkpoints yet. Make a commit while an AI agent is active to create one.</p>
+    {{end}}
+</section>
+{{end}}

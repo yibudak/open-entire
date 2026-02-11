@@ -1,0 +1,60 @@
+{{define "content"}}
+<h1>Checkpoint {{slice .Checkpoint.ID 0 8}}</h1>
+
+<section class="card">
+    <h2>Details</h2>
+    <dl>
+        <dt>ID</dt><dd>{{.Checkpoint.ID}}</dd>
+        <dt>Commit</dt><dd><code>{{.Checkpoint.CommitHash}}</code></dd>
+        <dt>Branch</dt><dd><span class="badge">{{.Checkpoint.Branch}}</span></dd>
+        <dt>Author</dt><dd>{{.Checkpoint.Author}}</dd>
+        <dt>Message</dt><dd>{{.Checkpoint.Message}}</dd>
+        <dt>Strategy</dt><dd>{{.Checkpoint.Strategy}}</dd>
+        <dt>Created</dt><dd>{{.Checkpoint.CreatedAt.Format "2006-01-02 15:04:05"}}</dd>
+        {{if .Checkpoint.Attribution}}
+        <dt>Attribution</dt>
+        <dd>{{printf "%.0f" .Checkpoint.Attribution.AgentPercent}}% agent ({{.Checkpoint.Attribution.AgentLines}}/{{.Checkpoint.Attribution.TotalLines}} lines)</dd>
+        {{end}}
+    </dl>
+</section>
+
+{{if .Checkpoint.Sessions}}
+<section class="card">
+    <h2>Sessions</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Agent</th>
+                <th>Input Tokens</th>
+                <th>Output Tokens</th>
+                <th>API Calls</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {{range .Checkpoint.Sessions}}
+            <tr>
+                <td>{{.Index}}</td>
+                <td>{{.AgentName}}</td>
+                <td>{{.TokenUsage.InputTokens}}</td>
+                <td>{{.TokenUsage.OutputTokens}}</td>
+                <td>{{.TokenUsage.APICalls}}</td>
+                <td><a href="/checkpoints/{{$.Checkpoint.ID}}/sessions/{{.Index}}">View</a></td>
+            </tr>
+            {{end}}
+        </tbody>
+    </table>
+</section>
+{{end}}
+
+{{if .Diff}}
+<section class="card">
+    <h2>Diff</h2>
+    <div class="diff-controls">
+        <button onclick="toggleDiffMode()" id="diff-toggle">Side-by-side</button>
+    </div>
+    <pre class="diff" id="diff-content">{{.Diff}}</pre>
+</section>
+{{end}}
+{{end}}

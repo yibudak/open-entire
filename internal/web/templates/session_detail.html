@@ -1,0 +1,15 @@
+{{define "content"}}
+<h1>Session {{.SessionIndex}}</h1>
+<p><a href="/checkpoints/{{.Checkpoint.ID}}">&larr; Back to checkpoint {{slice .Checkpoint.ID 0 8}}</a></p>
+
+<section class="card">
+    <h2>Transcript</h2>
+    <div class="transcript">
+        {{if .Transcript}}
+        <pre>{{.Transcript}}</pre>
+        {{else}}
+        <p class="empty">No transcript available.</p>
+        {{end}}
+    </div>
+</section>
+{{end}}
